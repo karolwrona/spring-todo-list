@@ -30,6 +30,7 @@ public class TodoController {
     }
     @PostMapping("/todo")
     public TodoDTO add(@RequestBody TodoDTO todoDTO) {
+        if (todoDTO.title == null || todoDTO.dueDate==null) {todoDTO.title = "dupa"; todoDTO.dueDate = "";}
         return todoService.add(todoDTO);
     }
     @PutMapping("/todo")
