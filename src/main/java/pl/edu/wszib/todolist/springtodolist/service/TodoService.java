@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface TodoService {
     List<TodoDTO> findAll();
+    List<TodoDTO> findTop5();
     TodoDTO find(Integer id);
     TodoDTO add(TodoDTO dto);
     TodoDTO update(TodoDTO dto);

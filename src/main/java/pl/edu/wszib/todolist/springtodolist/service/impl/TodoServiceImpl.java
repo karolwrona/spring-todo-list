@@ -40,8 +40,8 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     public TodoDTO add(TodoDTO dto) {
+        dto.status = Status.NEW.toString();
         Todo todo = converterComponent.convert(dto);
-        todo.setStatus(Status.NEW);
         return converterComponent.convert(todoDao.save(todo));
     }
 
@@ -62,5 +62,10 @@ public class TodoServiceImpl implements TodoService {
         Optional<Todo> todo = todoDao.findById(id);
         todo.ifPresent(t->todoDao.delete(t));
         return todo.map(converterComponent::convert).orElse(null);
+    }
+
+    @Override
+    public List<TodoDTO> findTop5() {
+        return todoDao.findTop5ByStatusIsNotOrderByDueDate(Status.COMPLETED).stream().map(converterComponent::convert).collect(Collectors.toList());
     }
 }
