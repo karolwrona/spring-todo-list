@@ -68,7 +68,7 @@ public class TodoServiceImpl implements TodoService {
     public List<TodoDTO> findTop5() {
         return todoDao.findTop5ByStatusIsNotOrderByDueDate(Status.COMPLETED).stream().map(converterComponent::convert).collect(Collectors.toList());
     }
-    @Override
+   @Override
     public int count(Status status) {
         return todoDao.countTodoByStatus(status);
     }
